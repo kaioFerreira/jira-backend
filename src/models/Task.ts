@@ -8,15 +8,12 @@ interface ITaskData {
   responsible: string,
   avatar: string,
   priority: string,
-  status: number
-  index: number,
+  status: number,
 }
 
 export class Task {
   static async create(data: ITaskData) {
-    return prisma.task.create({
-      data,
-    })
+    return await prisma.task.create({data})
   }
 
   static async index() {
@@ -44,7 +41,7 @@ export class Task {
   }
 
   static async update(id: string, data: ITaskData) {
-    return prisma.task.update({
+    return await prisma.task.update({
       where: {
         id,
       },

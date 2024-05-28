@@ -28,21 +28,21 @@ export async function usersRoutes(app: FastifyInstance) {
       priority: z.string(),
       avatar: z.string().url(),
       status: z.number(),
-      index: z.number(),
       responsible: z.string().nonempty('O responsavel é obrigatorio')
     })
 
-    const { title, description, avatar, index,  status, priority, responsible } = bodySchema.parse(request.body)
+    const { title, description, avatar,  status, priority, responsible } = bodySchema.parse(request.body)
 
-    return await Task.create({
+    const task = await Task.create({
       title,
       description,
       status,
       avatar,
-      index,
       priority,
       responsible
     })
+
+    return task
   })
 
   app.put('/task/:id', async (request) => {
@@ -56,18 +56,16 @@ export async function usersRoutes(app: FastifyInstance) {
       priority: z.string(),
       avatar: z.string().url(),
       status: z.number(),
-      index: z.number(),
       responsible: z.string().nonempty('O responsavel é obrigatorio')
     })
 
     const { id } = paramsSchema.parse(request.params)
-    const { title, description, avatar, index,  status, priority, responsible } = bodySchema.parse(request.body)
+    const { title, description, avatar,  status, priority, responsible } = bodySchema.parse(request.body)
 
     return await Task.update(id, {
       title, 
       description, 
       avatar, 
-      index,  
       status,
       priority, 
       responsible
