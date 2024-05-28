@@ -1,0 +1,13 @@
+# docker run --name mysql -e ALLOW_EMPTY_PASSWORD=yes -e MYSQL_USER=docker -e MYSQL_PASSWORD=docker -e MYSQL_DATABASE=db_docker -p 3306:3306 bitnami/mysql:latest
+version: '3'
+
+services:
+  mysql:
+    image: bitnami/mysql:latest
+    ports:
+      - 3306:3306
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_USER=docker
+      - MYSQL_PASSWORD=docker
+      - MYSQL_DATABASE=db_docker
